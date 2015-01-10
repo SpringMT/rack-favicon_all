@@ -1,6 +1,5 @@
 require 'rmagick'
 require 'rack/favicon_all/version'
-require 'pry'
 
 module Rack
   class FaviconAll
