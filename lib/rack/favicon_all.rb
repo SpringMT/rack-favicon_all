@@ -1,10 +1,11 @@
 require 'rmagick'
 require 'rack/favicon_all/version'
+require 'pry'
 
 module Rack
   class FaviconAll
     FAVICON = [
-      { path: /\A\/favicon\.ico/, size: [16, 16], mime_type: 'image/x-icon' },
+      { path: /\A\/favicon\.ico/, size: [16, 16], mime_type: 'image/x-icon', format: 'ICO' },
       { path: /\A\/favicon-16x16\.png/, size: [16, 16] },
       { path: /\A\/favicon-32x32\.png/, size: [32, 32] },
       { path: /\A\/favicon-96x96\.png/, size: [96, 96] },
@@ -28,28 +29,29 @@ module Rack
     ]
     def initialize(app, options = {})
       @app = app
-      @options = options
       @favicon_path = options[:favicon_path]
-      @image = Magick::Image.read(@favicon_path).first
+      @image = Magick::Image.read(@favicon_path).first unless @favicon_path.nil?
     end
 
     def call(env)
       status, headers, body = @app.call(env)
-      favicon_info = FAVICON.first { |f|  f[:path] =~ env['PATH_INFO'] }
+      return [status, headers, body] if @image.nil?
+
+      favicon_info = FAVICON.find { |f| env['PATH_INFO'] =~ f[:path] }
 
       return [status, headers, body] if favicon_info.nil?
 
       body = genarate_favicon(favicon_info)
       headers["Content-Length"] = body.bytesize.to_s
       headers["Content-Type"]   = favicon_info[:mime_type] || "imgae/png"
-      [status, headers, body]
+      [status, headers, [body]]
     end
 
     private
 
     def genarate_favicon(info)
       @image.scale!(*info[:size]).to_blob do
-        self.mime_type = info[:mime_type] unless info[:mime_type].nil?
+        self.format = info[:format] unless info[:format].nil?
       end
     end
   end

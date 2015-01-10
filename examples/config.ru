@@ -4,5 +4,5 @@ $:.unshift(File.dirname(__FILE__))
 require 'rack/favicon_all'
 require 'hello_world'
 
-use Rack::FaviconAll, image: "./icon.png"
+use Rack::FaviconAll, favicon_path: "./icon.png"
 run HelloWorld.new

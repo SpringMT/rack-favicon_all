@@ -1,6 +1,6 @@
 # Rack::FaviconAll
 
-TODO: Write a gem description
+Generate favicons for IE, FF, Chrome, Safari!
 
 ## Installation
 
@@ -20,7 +20,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In Gemfile
+
+```
+gem 'rack-favicon_all'
+```
+
+And write in config.ru below
+
+```
+require 'rack/favicon_all'
+use Rack::FaviconAll, favicon_path: "path/to/favicon.png"
+```
 
 ## Contributing
 
