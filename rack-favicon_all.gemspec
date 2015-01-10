@@ -6,15 +6,15 @@ require 'rack/favicon_all/version'
 Gem::Specification.new do |spec|
   spec.name          = "rack-favicon_all"
   spec.version       = Rack::FaviconAll::VERSION
-  spec.authors       = ["haruyama-makoto"]
-  spec.email         = ["makoto.haruyama@dena.com"]
+  spec.authors       = ["SpringMT"]
+  spec.email         = ["today.is.sky.blue.sky@gmail.com"]
 
   spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
   spec.required_rubygems_version = ">= 2.0"
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Generate favicons for IE, FF, Chrome, Safari!}
+  spec.description   = %q{Generate favicons for IE, FF, Chrome, Safari!}
+  spec.homepage      = "https://github.com/SpringMT/rack-favicon_all"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -1,4 +1,5 @@
 # Rack::FaviconAll
+This is a Ruby version of [bayashi/Plack-Middleware-Favicon](https://github.com/bayashi/Plack-Middleware-Favicon)
 
 Generate favicons for IE, FF, Chrome, Safari!
 
