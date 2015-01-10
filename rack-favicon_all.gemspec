@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.authors       = ["SpringMT"]
   spec.email         = ["today.is.sky.blue.sky@gmail.com"]
 
-  spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
   spec.required_rubygems_version = ">= 2.0"
 
   spec.summary       = %q{Generate favicons for IE, FF, Chrome, Safari!}
