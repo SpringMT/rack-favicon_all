@@ -29,21 +29,25 @@ module Rack
     def initialize(app, options = {})
       @app = app
       @favicon_path = options[:favicon_path]
-      @image = Magick::Image.read(@favicon_path).first unless @favicon_path.nil?
+      if !@favicon_path.nil? && ::File.exist?(@favicon_path)
+        @image = Magick::Image.read(@favicon_path).first
+      end
     end
 
     def call(env)
-      status, headers, body = @app.call(env)
-      return [status, headers, body] if @image.nil?
+      return @app.call(env) if @image.nil?
 
       favicon_info = FAVICON.find { |f| env['PATH_INFO'] =~ f[:path] }
-
-      return [status, headers, body] if favicon_info.nil?
+      return @app.call(env) if favicon_info.nil?
 
       body = genarate_favicon(favicon_info)
-      headers["Content-Length"] = body.bytesize.to_s
-      headers["Content-Type"]   = favicon_info[:mime_type] || "imgae/png"
-      [status, headers, [body]]
+      headers = {
+        "Content-Length" => body.bytesize.to_s,
+        "Content-Type"   => favicon_info[:mime_type] || "imgae/png",
+        "Last-Modified"  => Time.now.httpdate
+      }
+
+      [200, headers, [body]]
     end
 
     private
