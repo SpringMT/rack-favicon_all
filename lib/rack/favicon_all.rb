@@ -25,6 +25,7 @@ module Rack
       { path: /\A\/apple-touch-icon-152x152\.png/, size: [152, 152] },
       { path: /\A\/apple-touch-icon\.png/, size: [57, 57] },
       { path: /\A\/apple-touch-icon-precomposed\.png/, size: [57, 57] },
+      { path: /\A\/apple-touch-icon-120x120-precomposed\.png/, size: [120, 120] }
     ]
     def initialize(app, options = {})
       @app = app
